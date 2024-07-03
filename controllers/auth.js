@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
 
-const User = require('../models/user.js');
+const Food = require('../models/user.js');
 
 router.get('/sign-up', (req, res) => {
   res.render('auth/sign-up.ejs');
@@ -60,12 +60,9 @@ router.post('/sign-in', async (req, res) => {
     );
     if (!validPassword) {
       return res.send('Login failed. Please try again.');
-    }
-  
-    // There is a user AND they had the correct password. Time to make a session!
-    // Avoid storing the password, even in hashed format, in the session
-    // If there is other data you want to save to `req.session.user`, do so here!
-    req.session.user = {
+    }; 
+    
+  req.session.user = {
       username: userInDatabase.username,
       _id: userInDatabase._id
     };
