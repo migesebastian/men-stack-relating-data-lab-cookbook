@@ -42,11 +42,15 @@ app.use(
 app.use(passUserToView);
 
 app.get('/', (req, res) => {
-  res.render('index.ejs', {
-    user: req.session.user,
-  });
+  // Check if the user is logged in
+  if (req.session.user) {
+    // Redirect logged-in users to their applications index
+    res.redirect(`/users/${req.session.user._id}/foods`);
+  } else {
+    // Show the homepage for users who are not logged in
+    res.render('index.ejs');
+  }
 });
-
 
 app.use('/auth', authController);
 app.use(isSignedIn);

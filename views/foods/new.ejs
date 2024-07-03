@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add New Pantry Item</title>
+</head>
+<body>
+  <%- include('../partials/_navbar.ejs') %>
+  <h1>Add New Pantry Item</h1>
+
+  <form action="/users/<%= user._id %>/foods" method="POST">
+    <label for="name">Food Name:</label>
+    <input type="text" id="name" name="name" required>
+
+    <label for="quantity">Quantity:</label>
+    <input type="number" id="quantity" name="quantity" required>
+
+    <label for="expiryDate">Expiry Date:</label>
+    <input type="date" id="expiryDate" name="expiryDate" required>
+
+    <button type="submit">Add to Pantry</button>
+  </form>
+</body>
+</html>
