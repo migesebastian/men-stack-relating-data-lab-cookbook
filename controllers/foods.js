@@ -67,6 +67,29 @@ router.get('/', async (req, res) => {
     }
   });
 
+  router.put('/:itemId', async (req, res) => {
+    try {
+      // Look up the user from req.session
+      const currentUser = await Food.findById(req.session.user._id);
+      
+      // Find the food item by the itemId supplied from req.params
+      const foodItem = currentUser.pantry.id(req.params.itemId);
+      
+      // Use the .set() method to update the food item with the new data from req.body
+      foodItem.set(req.body);
+      
+      // Save changes to the user
+      await currentUser.save();
+      
+      // Redirect back to the pantry index view with a success message
+      res.redirect(`/users/${currentUser._id}/foods`);
+    } catch (error) {
+      // If any errors, log them and redirect back home
+      console.log(error);
+      res.redirect('/');
+    }
+  });
+
   router.get('/:foodsId/edit', async (req, res) => {
     try {
       const currentUser = await Foods.findById(req.session.user._id);

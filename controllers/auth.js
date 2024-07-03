@@ -20,7 +20,7 @@ router.get('/sign-out', (req, res) => {
 router.post('/sign-up', async (req, res) => {
   try {
     // Check if the username is already taken
-    const userInDatabase = await User.findOne({ username: req.body.username });
+    const userInDatabase = await Food.findOne({ username: req.body.username });
     if (userInDatabase) {
       return res.send('Username already taken.');
     }
@@ -36,7 +36,7 @@ router.post('/sign-up', async (req, res) => {
     req.body.password = hashedPassword;
   
     // All ready to create the new user!
-    await User.create(req.body);
+    await Food.create(req.body);
   
     res.redirect('/auth/sign-in');
   } catch (error) {
@@ -48,7 +48,7 @@ router.post('/sign-up', async (req, res) => {
 router.post('/sign-in', async (req, res) => {
   try {
     // First, get the user from the database
-    const userInDatabase = await User.findOne({ username: req.body.username });
+    const userInDatabase = await Food.findOne({ username: req.body.username });
     if (!userInDatabase) {
       return res.send('Login failed. Please try again.');
     }
