@@ -28,6 +28,6 @@ const pantrySchema = new mongoose.Schema({
   pantry: [foodSchema] 
 });
 
-const Food = mongoose.model('food', pantrySchema);
+const Food = mongoose.model('foods', pantrySchema);
 
 module.exports = Food;
