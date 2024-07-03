@@ -14,5 +14,18 @@ router.get('/', async (req, res) => {
       res.redirect('/');
     }
   });
+
+  // Show route for displaying a specific user's profile and pantry items
+router.get('/:userId', async (req, res) => {
+    try {
+      // Find the user by their ID
+      const user = await FOOD.findById(req.params.userId);
+      // Render the user's show view with the user's data
+      res.render('users/show.ejs', { user: user });
+    } catch (error) {
+      console.log(error);
+      res.redirect('/users');
+    }
+  });
   
   module.exports = router;
