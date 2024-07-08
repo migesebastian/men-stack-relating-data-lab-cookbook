@@ -42,6 +42,7 @@ app.use(
 
 app.use(passUserToView);
 
+
 app.get('/', (req, res) => {
   // Check if the user is logged in
   if (req.session.user) {
@@ -57,7 +58,6 @@ app.use('/auth', authController);
 app.use(isSignedIn);
 app.use('/users/:userId/foods',foodsController);
 app.use('/users', usersController); 
-
 
 
 app.listen(port, () => {
